@@ -1,0 +1,403 @@
+// Variables
+$primary-color: #d35400; // Warm Orange
+$secondary-color: #e67e22; // Soft Orange
+$background-color: #f5e6ca; // Light Beige
+$text-color: #5d4037; // Dark Brown
+$header-height: 60px;
+$sidebar-width: 200px;
+
+// Global Styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: $background-color;
+    color: $text-color;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+// Color Classes
+.bg-primary {
+    background-color: $primary-color;
+}
+
+.bg-secondary {
+    background-color: $secondary-color;
+}
+
+.text-color {
+    color: $text-color;
+}
+
+.text-background {
+    color: $background-color;
+}
+
+.text-secondary {
+    color: $secondary-color;
+}
+
+header {
+    background-color: $primary-color;
+    color: $text-color;
+    height: $header-height;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+
+    h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .navbar-toggler {
+        display: none;
+        background-color: $secondary-color;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+    }
+}
+
+.sidebar {
+    background-color: $secondary-color;
+    color: $background-color;
+    width: $sidebar-width;
+    height: 100vh;
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    padding: 20px;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+
+    nav ul {
+        list-style: none;
+
+        li {
+            margin-bottom: 20px;
+
+            a {
+                color: $background-color;
+                text-decoration: none;
+                font-size: 1rem;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+main {
+    margin-left: $sidebar-width;
+    padding: 20px;
+    padding-top: calc($header-height + 20px);
+    width: calc(100% - $sidebar-width);
+    flex: 1;
+
+    section {
+        margin-bottom: 40px;
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: $secondary-color;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    }
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+
+    .carousel-inner {
+        display: flex;
+        transition: transform 1s ease-in-out;
+        width: 100%;
+
+        .carousel-item {
+            min-width: 100%;
+
+            img {
+                width: 100%;
+                height: auto;
+                max-height: 200px; // Ensure the image does not exceed 200px in height
+                object-fit: cover;
+                display: block;
+                margin: 0 auto;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .carousel-control {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+        z-index: 1000;
+        margin: 0;
+
+        &.prev {
+            left: 5px;
+        }
+
+        &.next {
+            right: 5px;
+        }
+    }
+}
+
+// Modal Styles
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}
+
+footer {
+    background-color: $secondary-color;
+    color: $background-color;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+
+    p {
+        font-size: 0.875rem;
+    }
+}
+
+// Form Styles
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: auto;
+
+    label, input, textarea, button {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    input, textarea {
+        padding: 8px;
+        border: 1px solid $text-color;
+        border-radius: 4px;
+    }
+
+    button {
+        background-color: $primary-color;
+        color: $background-color;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-upload {
+        background-color: $primary-color;
+        color: $background-color;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+        text-align: center;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+}
+
+// Media Queries
+@media (max-width: 1200px) {
+    .sidebar {
+        width: 180px;
+    }
+
+    main {
+        margin-left: 180px;
+        width: calc(100% - 180px);
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        width: 160px;
+    }
+
+    main {
+        margin-left: 160px;
+        width: calc(100% - 160px);
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        height: 50px;
+        padding: 0 10px;
+
+        h1 {
+            font-size: 1.25rem; // Adjust font size for smaller screens
+        }
+
+        .navbar-toggler {
+            display: block;
+        }
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: sticky;
+        top: 50px; // Adjust top position to account for the header height
+        left: 0;
+        transform: translateY(0);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000; // Ensure the sidebar stays on top
+    }
+
+    .sidebar nav ul {
+        display: flex; // Display the menu items horizontally
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0;
+    }
+
+    .sidebar nav ul li {
+        margin-bottom: 0; // Remove bottom margin for horizontal layout
+    }
+
+    main {
+        margin-left: 0;
+        width: 100%;
+        padding-top: 70px; // Adjust padding to account for the header and navbar height
+    }
+
+    .carousel-inner {
+        width: 100%;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    header {
+        height: 40px;
+        font-size: 1rem;
+        padding: 0 5px;
+
+        h1 {
+            font-size: 1rem; // Further adjust font size for smaller screens
+        }
+
+        .navbar-toggler {
+            display: block;
+        }
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: sticky;
+        top: 40px; // Adjust top position to account for the header height
+        left: 0;
+        transform: translateY(0);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000; // Ensure the sidebar stays on top
+    }
+
+    .sidebar nav ul {
+        display: flex; // Display the menu items horizontally
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0;
+    }
+
+    .sidebar nav ul li {
+        margin-bottom: 0; // Remove bottom margin for horizontal layout
+    }
+
+    main {
+        margin-left: 0;
+        width: 100%;
+        padding-top: 60px; // Adjust padding to account for the header and navbar height
+    }
+
+    .carousel-inner {
+        width: 100%;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: auto;
+    }
+}
