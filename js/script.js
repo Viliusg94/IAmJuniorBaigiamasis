@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('.top-nav a');
 
-    // smooth slide paspaudus ant nuorodos
     links.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
@@ -19,16 +18,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     showSlide(currentSlide);
 
-    // Formos pateikimas
+    // Form submission handling
     const catForm = document.getElementById('catForm');
     if (catForm) {
         catForm.addEventListener('submit', (event) => {
             event.preventDefault();
             addCat();
         });
+
+        // Custom validation messages
+        const requiredFields = catForm.querySelectorAll('[required]');
+        requiredFields.forEach(field => {
+            field.addEventListener('invalid', (event) => {
+                event.target.setCustomValidity('Šis laukas yra privalomas.');
+            });
+
+            field.addEventListener('input', (event) => {
+                event.target.setCustomValidity('');
+            });
+        });
     }
 
-    // Failo įkelimas
+    // File input handling
     const catImageInput = document.getElementById('kaciukoNuotrauka');
     const fileNameDisplay = document.getElementById('fileName');
     if (catImageInput) {
@@ -38,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Meniu perjungimas mobiliesiems įrenginiams
+    // Toggle navbar for mobile
     const navbarToggler = document.querySelector('.navbar-toggler');
     if (navbarToggler) {
         navbarToggler.addEventListener('click', () => {
@@ -49,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let currentSlide = 0;
 
-// Rodo skaidrę pagal indeksą
 function showSlide(index) {
     const slides = document.querySelectorAll('.carousel-item');
     const totalSlides = slides.length;
@@ -64,17 +74,15 @@ function showSlide(index) {
     document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
 }
 
-// Rodo kitą skaidrę
 function nextSlide() {
     showSlide(currentSlide + 1);
 }
 
-// Rodo ankstesnę skaidrę
 function prevSlide() {
     showSlide(currentSlide - 1);
 }
 
-// Modal lango funkcionalumas
+// Modal functionality
 const modal = document.getElementById('imageModal');
 const modalImg = document.getElementById('modalImage');
 
@@ -111,9 +119,11 @@ function addCat() {
         return;
     }
 
+    console.log('Form submitted:', kaciukoVardas, kaciukoAprasymas, kontaktinisNumeris, miestas, kaciukoNuotrauka); // Debugging statement
+
     const reader = new FileReader();
     reader.onload = function (e) {
-        const newSection = document.createElement('div'); // sukuriamas naujo kačiuko div'as
+        const newSection = document.createElement('div'); // Changed to 'div' for better structure
         newSection.innerHTML = `
             <h3>${kaciukoVardas}</h3>
             <p>${kaciukoAprasymas}</p>
@@ -128,10 +138,10 @@ function addCat() {
     };
     reader.readAsDataURL(kaciukoNuotrauka);
 
-    // nuresetina formą
+    // Reset form values after successful submission
     const catForm = document.getElementById('catForm');
     if (catForm) {
         catForm.reset();
-        document.getElementById('fileName').textContent = 'Nepasirinkta nuotrauka'; // Jei nėra įkelto failo, defaultinis rodymas
+        document.getElementById('fileName').textContent = 'Nepasirinkta nuotrauka'; // Reset file name display
     }
 }
