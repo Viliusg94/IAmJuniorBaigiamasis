@@ -9,39 +9,44 @@
 <body>
     <header class="bg-primary text-color">
         <h1>Sveiki atvykę į kačiukų puslapį</h1>
-    </header>
-    <aside class="sidebar bg-secondary text-background">
-        <nav>
-            <ul>
+        <button class="navbar-toggler">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <nav class="top-nav">
+            <ul class="dropdown-menu">
                 <li><a href="#apieMus" class="text-background">Apie mus</a></li>
                 <li><a href="#rado" class="text-background">Kačiukai radę namus</a></li>
                 <li><a href="#iesko" class="text-background">Šiuo metu ieško namų</a></li>
                 <li><a href="#padekRasti" class="text-background">Padėk kačiukui rasti naujus namus</a></li>
             </ul>
         </nav>
-    </aside>
+    </header>
     <main>
         <section id="apieMus">
             <h2 class="text-secondary">Pagrindinis</h2>
             <p>Sveiki atvykę į mūsų kačiukų puslapį. Mes siūlome įvairias paslaugas jūsų mylimiems augintiniams.</p>
         </section>
-        <section id="rado">
-            <h2 class="text-secondary">Apie mus</h2>
-            <p>Sužinokite daugiau apie mūsų misiją ir komandą, kuri teikia paslaugas jūsų augintiniams.</p>
-            <div class="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="img/pet1.jpg" alt="Kačiukas 1">
+        <section id="rado" class="flex-container">
+            <div class="content">
+                <h2 class="text-secondary">Apie mus</h2>
+                <p>Sužinokite daugiau apie mūsų misiją ir komandą, kuri teikia paslaugas jūsų augintiniams.</p>
+            </div>
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="img/pet1.jpg" alt="Kačiukas 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/pet2.jpg" alt="Kačiukas 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/pet3.jpg" alt="Kačiukas 3">
+                        </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="img/pet2.jpg" alt="Kačiukas 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/pet3.jpg" alt="Kačiukas 3">
-                    </div>
+                    <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
+                    <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
                 </div>
-                <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
-                <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
             </div>
         </section>
         <section id="iesko">
@@ -51,19 +56,47 @@
         <section id="padekRasti">
             <h2 class="text-secondary">Padėk kačiukui rasti namus</h2>
             <p>Čia galite pridėti priklydusio kačiuko nuotraukas ir aprašymą, taip padėsite rasti naujus namus</p>
-            <form id="catForm">
-                <label for="catName">Kačiuko vardas:</label>
-                <input type="text" id="catName" name="catName" required>
-                <label for="catDescription">Aprašymas:</label>
-                <textarea id="catDescription" name="catDescription" required></textarea>
-                <label for="catImage" class="custom-file-upload">Pridėti nuotrauką</label>
-                <input type="file" id="catImage" name="catImage" accept="image/*" required>
-                <button type="submit" class="btn-primary">Pridėti kačiuką</button>
-            </form>
+            <div class="form-and-contacts">
+                <form id="catForm">
+                    <label for="kaciukoVardas">Kačiuko vardas:</label>
+                    <input type="text" id="kaciukoVardas" name="kaciukoVardas" required>
+                    <label for="kaciukoAprasymas">Aprašymas:</label>
+                    <textarea id="kaciukoAprasymas" name="kaciukoAprasymas" required></textarea>
+                    <label for="kontaktinisNumeris">Kontaktinis numeris:</label>
+                    <input type="tel" id="kontaktinisNumeris" name="kontaktinisNumeris" required>
+                    <label for="miestas">Miestas:</label>
+                    <select id="miestas" name="miestas" required>
+                        <option value="" disabled selected>Pasirinkite miestą</option>
+                        <option value="Vilnius">Vilnius</option>
+                        <option value="Kaunas">Kaunas</option>
+                        <option value="Klaipėda">Klaipėda</option>
+                        <option value="Šiauliai">Šiauliai</option>
+                        <option value="Panevėžys">Panevėžys</option>
+                        <option value="Alytus">Alytus</option>
+                        <option value="Marijampolė">Marijampolė</option>
+                        <option value="Mažeikiai">Mažeikiai</option>
+                        <option value="Jonava">Jonava</option>
+                        <option value="Utena">Utena</option>
+                        <option value="Kėdainiai">Kėdainiai</option>
+                        <option value="Telšiai">Telšiai</option>
+                        <option value="Ukmergė">Ukmergė</option>
+                    </select>
+                    <label for="kaciukoNuotrauka" class="custom-file-upload">Pridėti nuotrauką</label>
+                    <input type="file" id="kaciukoNuotrauka" name="kaciukoNuotrauka" accept="image/*">
+                    <span id="fileName" class="file-name">Nepasirinkta nuotrauka</span>
+                    <button type="submit" class="btn-primary">Pridėti kačiuką</button>
+                </form>
+                <div class="contacts">
+                    <h3>Kontaktai</h3>
+                    <p>El. paštas: info@kaciuku-puslapis.lt</p>
+                    <p>Telefonas: +370 600 00000</p>
+                    <p>Adresas: Kačiukų g. 1, Vilnius</p>
+                </div>
+            </div>
         </section>
     </main>
     <footer class="bg-secondary text-background">
-        <p>&copy; 2023 Kačiukų puslapis. Visos teisės saugomos.</p>
+        <p>&copy; 2024 Kačiukų puslapis. Visi kačiukai saugomi.</p>
     </footer>
 
     <!-- Modalas pilno dydžio nuotraukai -->

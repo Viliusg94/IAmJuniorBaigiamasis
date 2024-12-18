@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -5,9 +6,9 @@
 }
 
 body {
-  font-family: "Courier New", Courier, monospace;
-  background-color: #f5e6ca;
-  color: #5d4037;
+  font-family: "Poppins", sans-serif;
+  background-color: #FFF5E1;
+  color: #4A4A4A;
   line-height: 1.6;
   display: flex;
   flex-direction: column;
@@ -15,28 +16,28 @@ body {
 }
 
 .bg-primary {
-  background-color: #d35400;
+  background-color: #FF6F61;
 }
 
 .bg-secondary {
-  background-color: #e67e22;
+  background-color: #FFB88C;
 }
 
 .text-color {
-  color: #5d4037;
+  color: #4A4A4A;
 }
 
 .text-background {
-  color: #f5e6ca;
+  color: #FFF5E1;
 }
 
 .text-secondary {
-  color: #e67e22;
+  color: #FFB88C;
 }
 
 header {
-  background-color: #d35400;
-  color: #5d4037;
+  background-color: #FF6F61;
+  color: #4A4A4A;
   height: 60px;
   width: 100%;
   display: flex;
@@ -44,7 +45,7 @@ header {
   justify-content: space-between;
   padding: 0 20px;
   box-sizing: border-box;
-  position: fixed;
+  position: sticky;
   top: 0;
   z-index: 1000;
 }
@@ -54,49 +55,86 @@ header h1 {
   text-align: center;
 }
 header .navbar-toggler {
-  display: none;
-  background-color: #e67e22;
+  display: block;
+  background-color: #FFB88C;
   border: none;
   padding: 10px;
   cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+header .navbar-toggler:hover {
+  background-color: #ff9959;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 header .navbar-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  width: 24px;
+  height: 24px;
+  display: block;
 }
-
-.sidebar {
-  background-color: #e67e22;
-  color: #f5e6ca;
-  width: 200px;
-  height: 100vh;
-  position: fixed;
+header .top-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
   top: 60px;
-  left: 0;
-  padding: 20px;
-  overflow-y: auto;
-  transition: transform 0.3s ease-in-out;
+  right: 20px;
+  width: 100%;
+  max-width: 300px;
+  background-color: #FF6F61;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
-.sidebar nav ul {
+header .top-nav.active {
+  max-height: 500px;
+  opacity: 1;
+  visibility: visible;
+}
+header .top-nav ul {
   list-style: none;
+  margin: 0;
+  padding: 10px 0;
 }
-.sidebar nav ul li {
-  margin-bottom: 20px;
+header .top-nav ul li {
+  margin: 10px 0;
+  text-align: right;
 }
-.sidebar nav ul li a {
-  color: #f5e6ca;
+header .top-nav ul li a {
+  color: #FFF5E1;
   text-decoration: none;
   font-size: 1rem;
+  padding: 10px 20px;
+  display: block;
 }
-.sidebar nav ul li a:hover {
+header .top-nav ul li a:hover {
   text-decoration: underline;
 }
 
 main {
-  margin-left: 200px;
   padding: 20px;
-  padding-top: 80px;
-  width: calc(100% - 200px);
+  width: 100%;
   flex: 1;
+}
+main .flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+main .content {
+  flex: 1;
+  margin-right: 20px;
+}
+main .carousel-container {
+  flex: 1;
+  max-width: 600px;
 }
 main section {
   margin-bottom: 40px;
@@ -104,10 +142,31 @@ main section {
 main section h2 {
   font-size: 1.25rem;
   margin-bottom: 10px;
-  color: #e67e22;
+  color: #FFB88C;
 }
 main section p {
   font-size: 1rem;
+}
+main .form-and-contacts {
+  display: flex;
+  justify-content: space-between;
+}
+main .form-and-contacts form {
+  flex: 1;
+  margin-right: 20px;
+}
+main .form-and-contacts .contacts {
+  flex: 1;
+  background-color: #FFB88C;
+  color: #FFF5E1;
+  padding: 20px;
+  border-radius: 10px;
+}
+main .form-and-contacts .contacts h3 {
+  margin-top: 0;
+}
+main .form-and-contacts .contacts p {
+  margin: 10px 0;
 }
 
 .carousel {
@@ -143,16 +202,43 @@ main section p {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  padding: 5px;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 0;
   margin: 0;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border-radius: 50%;
 }
 .carousel .carousel-control.prev {
-  left: 5px;
+  left: 10px;
 }
 .carousel .carousel-control.next {
-  right: 5px;
+  right: 10px;
+}
+.carousel .carousel-control:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.1);
+}
+.carousel .flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.carousel .content {
+  flex: 1;
+  max-width: 600px;
+}
+.carousel .carousel-container {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .modal {
@@ -183,8 +269,8 @@ main section p {
 }
 
 footer {
-  background-color: #e67e22;
-  color: #f5e6ca;
+  background-color: #FFB88C;
+  color: #FFF5E1;
   text-align: center;
   padding: 10px 0;
   position: relative;
@@ -201,58 +287,59 @@ form {
   align-items: flex-start;
   margin-top: auto;
 }
-form label, form input, form textarea, form button {
+form label, form input, form textarea, form button, form select {
   margin-bottom: 10px;
   width: 100%;
 }
-form input, form textarea {
+form input, form textarea, form select {
   padding: 8px;
-  border: 1px solid #5d4037;
+  border: 1px solid #4A4A4A;
   border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
 }
 form button {
-  background-color: #d35400;
-  color: #f5e6ca;
+  background-color: #FF6F61;
+  color: #FFF5E1;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
 }
 form button:hover {
-  background-color: #a04000;
+  background-color: #ff412e;
 }
 form input[type=file] {
   display: none;
 }
 form .custom-file-upload {
-  background-color: #d35400;
-  color: #f5e6ca;
+  background-color: #FF6F61;
+  color: #FFF5E1;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 4px;
   text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
 }
 form .custom-file-upload:hover {
-  background-color: #a04000;
+  background-color: #ff412e;
 }
 
 @media (max-width: 1200px) {
-  .sidebar {
-    width: 180px;
-  }
-  main {
-    margin-left: 180px;
-    width: calc(100% - 180px);
+  .top-nav ul li {
+    margin-left: 10px;
   }
 }
 @media (max-width: 992px) {
-  .sidebar {
-    width: 160px;
-  }
-  main {
-    margin-left: 160px;
-    width: calc(100% - 160px);
+  .top-nav ul li {
+    margin-left: 5px;
   }
 }
 @media (max-width: 768px) {
@@ -265,37 +352,36 @@ form .custom-file-upload:hover {
   }
   header .navbar-toggler {
     display: block;
+    padding: 5px;
   }
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: sticky;
+  header .top-nav {
+    right: 10px;
     top: 50px;
-    left: 0;
-    transform: translateY(0);
-    transition: transform 0.3s ease-in-out;
-    z-index: 1000;
   }
-  .sidebar nav ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 0;
+  header .top-nav ul {
+    flex-direction: column;
+    align-items: center;
   }
-  .sidebar nav ul li {
-    margin-bottom: 0;
+  header .top-nav ul li {
+    margin: 5px 0;
   }
-  main {
-    margin-left: 0;
+  .flex-container {
+    flex-direction: column;
+  }
+  .content {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  .carousel-container {
+    margin-bottom: 20px;
+  }
+  .form-and-contacts {
+    flex-direction: column;
+  }
+  .form-and-contacts form, .form-and-contacts .contacts {
     width: 100%;
-    padding-top: 70px;
-  }
-  .carousel-inner {
-    width: 100%;
-  }
-  .carousel-item img {
-    width: 100%;
-    height: auto;
+    margin-right: 0;
+    margin-bottom: 20px;
   }
 }
 @media (max-width: 576px) {
@@ -309,36 +395,35 @@ form .custom-file-upload:hover {
   }
   header .navbar-toggler {
     display: block;
+    padding: 5px;
   }
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: sticky;
+  header .top-nav {
+    right: 5px;
     top: 40px;
-    left: 0;
-    transform: translateY(0);
-    transition: transform 0.3s ease-in-out;
-    z-index: 1000;
   }
-  .sidebar nav ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 0;
+  header .top-nav ul {
+    flex-direction: column;
+    align-items: center;
   }
-  .sidebar nav ul li {
-    margin-bottom: 0;
+  header .top-nav ul li {
+    margin: 5px 0;
   }
-  main {
-    margin-left: 0;
+  .flex-container {
+    flex-direction: column;
+  }
+  .content {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  .carousel-container {
+    margin-bottom: 20px;
+  }
+  .form-and-contacts {
+    flex-direction: column;
+  }
+  .form-and-contacts form, .form-and-contacts .contacts {
     width: 100%;
-    padding-top: 60px;
-  }
-  .carousel-inner {
-    width: 100%;
-  }
-  .carousel-item img {
-    width: 100%;
-    height: auto;
+    margin-right: 0;
+    margin-bottom: 20px;
   }
 }/*# sourceMappingURL=styles.css.map */

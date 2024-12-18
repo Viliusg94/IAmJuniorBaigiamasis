@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const links = document.querySelectorAll('.sidebar a');
+    const links = document.querySelectorAll('.top-nav a');
 
+    // smooth slide paspaudus ant nuorodos
     links.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
@@ -18,21 +19,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     showSlide(currentSlide);
 
-    // Form submission handling
+    // Formos pateikimas
     const catForm = document.getElementById('catForm');
-    catForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        addCat();
-        catForm.reset(); // Reset form values
-    });
+    if (catForm) {
+        catForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            addCat();
+        });
+    }
 
-    // Toggle sidebar for mobile
+    // Failo įkelimas
+    const catImageInput = document.getElementById('kaciukoNuotrauka');
+    const fileNameDisplay = document.getElementById('fileName');
+    if (catImageInput) {
+        catImageInput.addEventListener('change', (event) => {
+            const fileName = event.target.files[0] ? event.target.files[0].name : 'Nepasirinkta nuotrauka';
+            fileNameDisplay.textContent = fileName;
+        });
+    }
+
+    // Meniu perjungimas mobiliesiems įrenginiams
     const navbarToggler = document.querySelector('.navbar-toggler');
-    navbarToggler.addEventListener('click', toggleSidebar);
+    if (navbarToggler) {
+        navbarToggler.addEventListener('click', () => {
+            document.querySelector('.top-nav').classList.toggle('active');
+        });
+    }
 });
 
 let currentSlide = 0;
 
+// Rodo skaidrę pagal indeksą
 function showSlide(index) {
     const slides = document.querySelectorAll('.carousel-item');
     const totalSlides = slides.length;
@@ -47,15 +64,17 @@ function showSlide(index) {
     document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
 }
 
+// Rodo kitą skaidrę
 function nextSlide() {
     showSlide(currentSlide + 1);
 }
 
+// Rodo ankstesnę skaidrę
 function prevSlide() {
     showSlide(currentSlide - 1);
 }
 
-// Modal functionality
+// Modal lango funkcionalumas
 const modal = document.getElementById('imageModal');
 const modalImg = document.getElementById('modalImage');
 
@@ -70,30 +89,49 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-// Function to add a new cat
+// Naujo kačiuko pridėjimas
 function addCat() {
-    const catName = document.getElementById('catName').value;
-    const catDescription = document.getElementById('catDescription').value;
-    const catImage = document.getElementById('catImage').files[0];
+    const kaciukoVardas = document.getElementById('kaciukoVardas').value;
+    const kaciukoAprasymas = document.getElementById('kaciukoAprasymas').value;
+    const kontaktinisNumeris = document.getElementById('kontaktinisNumeris').value;
+    const miestas = document.getElementById('miestas').value;
+    const kaciukoNuotraukaInput = document.getElementById('kaciukoNuotrauka');
+    const kaciukoNuotrauka = kaciukoNuotraukaInput.files[0];
 
-    if (catImage) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const newSection = document.createElement('section');
-            newSection.innerHTML = `
-                <h2>${catName}</h2>
-                <p>${catDescription}</p>
-                <img src="${e.target.result}" alt="${catName}" width="200" height="200">
-            `;
-            document.querySelector('main').insertBefore(newSection, document.getElementById('catForm'));
-            console.log('New cat added:', catName, catDescription);
-        };
-        reader.readAsDataURL(catImage);
-    } else {
-        console.log('No image selected');
+    // Telefono numerio validacija
+    const phoneRegex = /^\+?[0-9]{7,15}$/;
+    if (!phoneRegex.test(kontaktinisNumeris)) {
+        alert('Netinkamai įvestas telefono numeris.');
+        return;
     }
-}
 
-function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('active');
+    // Nuotraukos validacija
+    if (!kaciukoNuotrauka) {
+        alert('Nuotrauka nepridėta. Prašome pridėti nuotrauką');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const newSection = document.createElement('div'); // sukuriamas naujo kačiuko div'as
+        newSection.innerHTML = `
+            <h3>${kaciukoVardas}</h3>
+            <p>${kaciukoAprasymas}</p>
+            <p>Kontaktinis numeris: ${kontaktinisNumeris}</p>
+            <p>Miestas: ${miestas}</p>
+            <img src="${e.target.result}" alt="${kaciukoVardas}" width="200" height="200" class="clickable-image">
+        `;
+        const ieskoSection = document.getElementById('iesko');
+        if (ieskoSection) {
+            ieskoSection.appendChild(newSection);
+        }
+    };
+    reader.readAsDataURL(kaciukoNuotrauka);
+
+    // nuresetina formą
+    const catForm = document.getElementById('catForm');
+    if (catForm) {
+        catForm.reset();
+        document.getElementById('fileName').textContent = 'Nepasirinkta nuotrauka'; // Jei nėra įkelto failo, defaultinis rodymas
+    }
 }

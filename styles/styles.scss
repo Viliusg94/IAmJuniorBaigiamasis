@@ -1,12 +1,15 @@
-// Variables
-$primary-color: #d35400; // Warm Orange
-$secondary-color: #e67e22; // Soft Orange
-$background-color: #f5e6ca; // Light Beige
-$text-color: #5d4037; // Dark Brown
+// Kintamieji
+$primary-color: #FF6F61; 
+$secondary-color: #FFB88C; 
+$background-color: #FFF5E1; 
+$text-color: #4A4A4A; 
 $header-height: 60px;
-$sidebar-width: 200px;
+$nav-height: 40px;
 
-// Global Styles
+// Importuoja Google šriftą
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+// Globalūs stiliai
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +17,7 @@ $sidebar-width: 200px;
 }
 
 body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Poppins', sans-serif;
     background-color: $background-color;
     color: $text-color;
     line-height: 1.6;
@@ -23,7 +26,7 @@ body {
     min-height: 100vh;
 }
 
-// Color Classes
+// Spalvų klasės
 .bg-primary {
     background-color: $primary-color;
 }
@@ -54,7 +57,7 @@ header {
     justify-content: space-between;
     padding: 0 20px;
     box-sizing: border-box;
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 1000;
 
@@ -65,43 +68,71 @@ header {
     }
 
     .navbar-toggler {
-        display: none;
+        display: block;
         background-color: $secondary-color;
         border: none;
         padding: 10px;
         cursor: pointer;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            background-color: darken($secondary-color, 10%);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
 
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+            width: 24px;
+            height: 24px;
+            display: block;
         }
     }
-}
 
-.sidebar {
-    background-color: $secondary-color;
-    color: $background-color;
-    width: $sidebar-width;
-    height: 100vh;
-    position: fixed;
-    top: $header-height;
-    left: 0;
-    padding: 20px;
-    overflow-y: auto;
-    transition: transform 0.3s ease-in-out;
+    .top-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: $header-height;
+        right: 20px;
+        width: 100%;
+        max-width: 300px;
+        background-color: $primary-color;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 
-    nav ul {
-        list-style: none;
+        &.active {
+            max-height: 500px; 
+            opacity: 1;
+            visibility: visible;
+        }
 
-        li {
-            margin-bottom: 20px;
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 10px 0;
 
-            a {
-                color: $background-color;
-                text-decoration: none;
-                font-size: 1rem;
+            li {
+                margin: 10px 0;
+                text-align: right;
 
-                &:hover {
-                    text-decoration: underline;
+                a {
+                    color: $background-color;
+                    text-decoration: none;
+                    font-size: 1rem;
+                    padding: 10px 20px;
+                    display: block;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
         }
@@ -109,11 +140,26 @@ header {
 }
 
 main {
-    margin-left: $sidebar-width;
     padding: 20px;
-    padding-top: calc($header-height + 20px);
-    width: calc(100% - $sidebar-width);
+    width: 100%;
     flex: 1;
+
+    .flex-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .content {
+        flex: 1;
+        margin-right: 20px;
+    }
+
+    .carousel-container {
+        flex: 1;
+        max-width: 600px;
+    }
 
     section {
         margin-bottom: 40px;
@@ -126,6 +172,32 @@ main {
 
         p {
             font-size: 1rem;
+        }
+    }
+
+    .form-and-contacts {
+        display: flex;
+        justify-content: space-between;
+
+        form {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .contacts {
+            flex: 1;
+            background-color: $secondary-color;
+            color: $background-color;
+            padding: 20px;
+            border-radius: 10px;
+
+            h3 {
+                margin-top: 0;
+            }
+
+            p {
+                margin: 10px 0;
+            }
         }
     }
 }
@@ -142,14 +214,14 @@ main {
         display: flex;
         transition: transform 1s ease-in-out;
         width: 100%;
-
+    
         .carousel-item {
             min-width: 100%;
-
+    
             img {
                 width: 100%;
                 height: auto;
-                max-height: 200px; // Ensure the image does not exceed 200px in height
+                max-height: 200px;
                 object-fit: cover;
                 display: block;
                 margin: 0 auto;
@@ -157,30 +229,61 @@ main {
             }
         }
     }
-
+    
     .carousel-control {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
+        background-color: rgba(0, 0, 0, 0.5); // Pusiau permatomas fonas
+        color: white; // Baltos spalvos rodyklė
         border: none;
-        padding: 5px;
         cursor: pointer;
-        z-index: 1000;
+        z-index: 0;
         margin: 0;
-
+        padding: 10px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px; // Rodyklės dydis
+        border-radius: 50%; //Suapvalinta rodyklė
+    
         &.prev {
-            left: 5px;
+            left: 10px; 
         }
 
         &.next {
-            right: 5px;
+            right: 10px; 
         }
+    
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.7); // Tamsesnis fonas užvedus pelę
+            transform: translateY(-50%) scale(1.1); // Šiek tiek padidinkite užvedus pelę
+        }
+    }
+    
+    .flex-container {
+        display: flex;
+        justify-content: center; // Centruoja turinį horizontaliai
+        align-items: center; // Centruoja turinį vertikaliai
+        flex-wrap: wrap;
+        gap: 20px; // tarpai tarp elementų
+    }
+    
+    .content {
+        flex: 1;
+        max-width: 600px;
+    }
+    
+    .carousel-container {
+        flex: 1;
+        max-width: 600px;
+        margin: 0 auto; // išcentruoja karuselę
     }
 }
 
-// Modal Styles
+// Modal stiliai
 .modal {
     display: none;
     position: fixed;
@@ -224,22 +327,24 @@ footer {
     }
 }
 
-// Form Styles
+// Formos stiliai
 form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-top: auto;
 
-    label, input, textarea, button {
+    label, input, textarea, button, select {
         margin-bottom: 10px;
         width: 100%;
     }
 
-    input, textarea {
+    input, textarea, select {
         padding: 8px;
         border: 1px solid $text-color;
         border-radius: 4px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
     }
 
     button {
@@ -249,6 +354,10 @@ form {
         padding: 10px 20px;
         cursor: pointer;
         border-radius: 4px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
 
         &:hover {
             background-color: darken($primary-color, 10%);
@@ -267,6 +376,9 @@ form {
         cursor: pointer;
         border-radius: 4px;
         text-align: center;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
 
         &:hover {
             background-color: darken($primary-color, 10%);
@@ -274,26 +386,16 @@ form {
     }
 }
 
-// Media Queries
-@media (max-width: 1200px) {
-    .sidebar {
-        width: 180px;
-    }
 
-    main {
-        margin-left: 180px;
-        width: calc(100% - 180px);
+@media (max-width: 1200px) {
+    .top-nav ul li {
+        margin-left: 10px;
     }
 }
 
 @media (max-width: 992px) {
-    .sidebar {
-        width: 160px;
-    }
-
-    main {
-        margin-left: 160px;
-        width: calc(100% - 160px);
+    .top-nav ul li {
+        margin-left: 5px;
     }
 }
 
@@ -303,49 +405,50 @@ form {
         padding: 0 10px;
 
         h1 {
-            font-size: 1.25rem; // Adjust font size for smaller screens
+            font-size: 1.25rem; //Keičiasi šrifto dydis mažesniems ekranams
         }
 
         .navbar-toggler {
             display: block;
+            padding: 5px; // Mygtukas talpinamas į antraštę
+        }
+
+        .top-nav {
+            right: 10px;
+            top: 50px; // išsidėsto tiesiai po antrašte
+        }
+
+        .top-nav ul {
+            flex-direction: column;
+            align-items: center;
+
+            li {
+                margin: 5px 0;
+            }
         }
     }
 
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: sticky;
-        top: 50px; // Adjust top position to account for the header height
-        left: 0;
-        transform: translateY(0);
-        transition: transform 0.3s ease-in-out;
-        z-index: 1000; // Ensure the sidebar stays on top
+    .flex-container {
+        flex-direction: column;
     }
 
-    .sidebar nav ul {
-        display: flex; // Display the menu items horizontally
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 0;
+    .content {
+        margin-right: 0;
+        margin-bottom: 20px;
     }
 
-    .sidebar nav ul li {
-        margin-bottom: 0; // Remove bottom margin for horizontal layout
+    .carousel-container {
+        margin-bottom: 20px;
     }
 
-    main {
-        margin-left: 0;
-        width: 100%;
-        padding-top: 70px; // Adjust padding to account for the header and navbar height
-    }
+    .form-and-contacts {
+        flex-direction: column;
 
-    .carousel-inner {
-        width: 100%;
-    }
-
-    .carousel-item img {
-        width: 100%;
-        height: auto;
+        form, .contacts {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
     }
 }
 
@@ -356,48 +459,49 @@ form {
         padding: 0 5px;
 
         h1 {
-            font-size: 1rem; // Further adjust font size for smaller screens
+            font-size: 1rem; // Sumažina šrifto dydį mažiems ekranams
         }
 
         .navbar-toggler {
             display: block;
+            padding: 5px; //mygtukas telpantis į antraštę
+        }
+
+        .top-nav {
+            right: 5px;
+            top: 40px; //išdėstymas tiesiai po antrašte
+        }
+
+        .top-nav ul {
+            flex-direction: column;
+            align-items: center;
+
+            li {
+                margin: 5px 0;
+            }
         }
     }
 
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: sticky;
-        top: 40px; // Adjust top position to account for the header height
-        left: 0;
-        transform: translateY(0);
-        transition: transform 0.3s ease-in-out;
-        z-index: 1000; // Ensure the sidebar stays on top
+    .flex-container {
+        flex-direction: column;
     }
 
-    .sidebar nav ul {
-        display: flex; // Display the menu items horizontally
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 0;
+    .content {
+        margin-right: 0;
+        margin-bottom: 20px;
     }
 
-    .sidebar nav ul li {
-        margin-bottom: 0; // Remove bottom margin for horizontal layout
+    .carousel-container {
+        margin-bottom: 20px;
     }
 
-    main {
-        margin-left: 0;
-        width: 100%;
-        padding-top: 60px; // Adjust padding to account for the header and navbar height
-    }
+    .form-and-contacts {
+        flex-direction: column;
 
-    .carousel-inner {
-        width: 100%;
-    }
-
-    .carousel-item img {
-        width: 100%;
-        height: auto;
+        form, .contacts {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
     }
 }
