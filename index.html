@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="bg-primary text-color">
-        <h1>Sveiki atvykę į kačiukų puslapį</h1>
+        <h1>Sveiki atvykę į priklydusių kačiukų puslapį</h1>
         <button class="navbar-toggler">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,13 +23,27 @@
     </header>
     <main>
         <section id="apieMus">
+            <h2 class="text-secondary">Apie mus</h2>
+            <p>Sveiki atvykę į priklydusių kačiukų puslapį. Čia galite padėti rasti naujus namus paklydusiems kačiukams.</p>
+        </section>
+        <section id="apieMus">
             <h2 class="text-secondary">Pagrindinis</h2>
             <p>Sveiki atvykę į mūsų kačiukų puslapį. Mes siūlome įvairias paslaugas jūsų mylimiems augintiniams.</p>
         </section>
         <section id="rado" class="flex-container">
             <div class="content">
-                <h2 class="text-secondary">Apie mus</h2>
-                <p>Sužinokite daugiau apie mūsų misiją ir komandą, kuri teikia paslaugas jūsų augintiniams.</p>
+                <h2 class="text-secondary">Šie kačiukai jau rado namus</h2>
+                <p> 
+                    Radę šiltus namus, kačiukai dabar gyvena laimingai ir saugiai. Džiaugiamės galėdami pasakyti, kad šie mažieji draugai rado jaukius namus ir
+                     tapo mylimais šeimos nariais. Jie visada laukia savo šeimininkų ir džiaugiasi savo naujomis gyvenimo sąlygomis. 
+                     Savo mažose širdelėse jie nešioja begalinį dėkingumą už suteiktą šilumą ir rūpestį. Tai tikras džiaugsmas matyti juos sveikus ir laimingus.
+                </p>
+                <br>
+                <p>
+                     Nauji namai – nauji nuotykiai! Po šilto ir rūpestingo priėmimo, šie kačiukai greitai prisitaikė 
+                     prie savo naujos aplinkos ir jau mėgaujasi šeiminikų draugija. Dabar jie gali laisvai žaisti, ilsėtis
+                      ir jaustis saugūs, ko jų gyvenime labai trūko. Dėka savo naujų šeimininkų rūpestingumo, jie tapo tikrais šeimos nariais ir teikia džiaugsmą kiekvieną dieną.
+                </p>
             </div>
             <div class="carousel-container">
                 <div class="carousel">
@@ -43,6 +57,12 @@
                         <div class="carousel-item">
                             <img src="img/pet3.jpg" alt="Kačiukas 3">
                         </div>
+                        <div class="carousel-item">
+                            <img src="img/pet4.jpg" alt="Kačiukas 4">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/pet5.jpg" alt="Kačiukas 4">
+                        </div>
                     </div>
                     <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
                     <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
@@ -52,6 +72,11 @@
         <section id="iesko">
             <h2 class="text-secondary">Šiuo metu ieško namų</h2>
             <p>Šiuo metu šie kačiukai ieško naujų namų:</p>
+            <h3>Pūkis</h3>
+            <p>Pūkis - labai draugiškas ir meilus kačiukas. Jis labai mėgsta žaisti ir gali būti puikus draugas visai šeimai.</p>
+            <p>Kontaktinis numeris: +37060000000</p>
+            <p>Miestas: Kaunas</p>
+            <img src="img/pet1.jpg" alt="Pūkis" class="clickable-image" width="200" height="200"  onclick="openModal(this.src)">
         </section>
         <section id="padekRasti">
             <h2 class="text-secondary">Padėk kačiukui rasti namus</h2>

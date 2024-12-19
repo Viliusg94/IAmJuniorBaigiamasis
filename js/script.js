@@ -88,10 +88,14 @@ const modalImg = document.getElementById('modalImage');
 
 document.querySelectorAll('.carousel-item img').forEach(img => {
     img.addEventListener('click', () => {
-        modal.style.display = 'block';
-        modalImg.src = img.src;
+        openModal(img.src);
     });
 });
+
+function openModal(src) {
+    modal.style.display = 'block';
+    modalImg.src = src;
+}
 
 function closeModal() {
     modal.style.display = 'none';
@@ -129,7 +133,7 @@ function addCat() {
             <p>${kaciukoAprasymas}</p>
             <p>Kontaktinis numeris: ${kontaktinisNumeris}</p>
             <p>Miestas: ${miestas}</p>
-            <img src="${e.target.result}" alt="${kaciukoVardas}" width="200" height="200" class="clickable-image">
+            <img src="${e.target.result}" alt="${kaciukoVardas}" width="200" height="200" class="clickable-image" onclick="openModal('${e.target.result}')">
         `;
         const ieskoSection = document.getElementById('iesko');
         if (ieskoSection) {
